@@ -1,7 +1,7 @@
 package search;
 
-import book.BookID;
-import book.ChapterID;
+import book.contents.BookID;
+import book.contents.ChapterID;
 
 /*
  * This class holds the search results from each specific book.
@@ -9,7 +9,6 @@ import book.ChapterID;
 
 public interface ISearchResult 
 {
-	public BookID getBookID();
 	public ChapterID getChapterID();
 	public String getPreview();
 }

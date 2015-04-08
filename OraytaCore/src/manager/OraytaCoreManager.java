@@ -1,7 +1,7 @@
 package manager;
 
 import download.DownloadManager;
-import book.BookID;
+import book.contents.BookID;
 import settings.GeneralSettings;
 import tree.TreeNode;
 

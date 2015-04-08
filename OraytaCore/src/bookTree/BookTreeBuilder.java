@@ -8,9 +8,9 @@ import java.util.List;
 
 import tree.TreeNode;
 
-import book.ABook;
-import book.BookFolder;
-import book.OBK_Book;
+import book.bookTypes.ABook;
+import book.bookTypes.Book_Folder;
+import book.bookTypes.Book_OBK;
 
 /*
  * Builds the bookTree from the file system
@@ -23,7 +23,7 @@ public class BookTreeBuilder
 	public TreeNode<ABook> buildTree(String rootPath)
 	{
 		//Root is a folder called 'OraytaBooks'
-		tree = new TreeNode<ABook>(new BookFolder(rootPath, "OraytaBooks"));
+		tree = new TreeNode<ABook>(new Book_Folder(rootPath, "OraytaBooks"));
 		
 		List<File> files = Arrays.asList(new File(rootPath).listFiles());
 		sortByLeadingNumber(files);
@@ -45,7 +45,7 @@ public class BookTreeBuilder
 			{
 				String folderPath = f.getAbsolutePath().replace(FOLDER_CONF_SUFFIX, "");
 				
-				book = new BookFolder(folderPath);
+				book = new Book_Folder(folderPath);
 				TreeNode<ABook> branch = treeNode.addChild(book);
 				
 				List<File> children = Arrays.asList(new File(folderPath).listFiles());
@@ -54,7 +54,7 @@ public class BookTreeBuilder
 			}
 			else if (f.getName().endsWith(OBK_SUFFIX))
 			{
-				book = new OBK_Book(f.getAbsolutePath());
+				book = new Book_OBK(f.getAbsolutePath());
 				treeNode.addChild(book);
 			}
 		}

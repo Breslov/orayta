@@ -1,6 +1,8 @@
 package tester;
 
 import tester.classTester.BinarySearchTest;
+import tester.classTester.BookTreeTester;
+import tester.classTester.OBKReadTest;
 
 
 /*
@@ -17,7 +19,10 @@ public class TestRunner
 	
 	private static void runTest()
 	{
-		ITest t = new BinarySearchTest();
+		//ITest t = new BinarySearchTest();
+		//ITest t = new BookTreeTester();
+		ITest t = new OBKReadTest();
+		
 		t.Run();
 	}
 

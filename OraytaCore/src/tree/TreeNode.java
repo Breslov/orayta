@@ -123,6 +123,6 @@ public class TreeNode<T> implements ITree<T>, Iterable<TreeNode<T>> {
     //ToString of the nodes data, ignoring the fact that it's part of a tree
 	@Override
     public String toString() {
-            return data != null ? data.toString() : "[data null]";
+            return data != null ? "Node data: " + data.toString() : "[data null]";
     }
 }

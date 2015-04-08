@@ -6,5 +6,8 @@ package search;
 
 public interface ISearchQuery
 {
-
+	public String getSearchString();
+	public Boolean exactMatch();
+	
+	
 }

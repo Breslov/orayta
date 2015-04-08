@@ -1,5 +1,5 @@
 package tree;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,8 +11,7 @@ public class TreeNode<T> implements ITree<T>, Iterable<TreeNode<T>> {
     public T data;
     public TreeNode<T> parent;
     public List<TreeNode<T>> children;
-
-    private ArrayList<TreeNode<T>> elementsIndex;
+    private List<TreeNode<T>> elementsIndex;
     
     public boolean isRoot() {
         return parent == null;
@@ -26,8 +25,8 @@ public class TreeNode<T> implements ITree<T>, Iterable<TreeNode<T>> {
         this.data = data;
         this.children = new LinkedList<TreeNode<T>>();
         
-        this.elementsIndex = new ArrayList<TreeNode<T>>();
-        this.elementsIndex.add(this);
+        elementsIndex = new LinkedList<TreeNode<T>>();
+        
     }
 
     public TreeNode<T> addChild(T child) 
@@ -63,13 +62,17 @@ public class TreeNode<T> implements ITree<T>, Iterable<TreeNode<T>> {
             parent.unRegisterChildFromSearch(node);
 	}
 
-    public TreeNode<T> findTreeNode(TreeNode<T> node) 
+    public Collection<TreeNode<T>> findTreeNodes(T data) 
     {
-    	return elementsIndex.get(elementsIndex.indexOf(node));
+    	LinkedList<TreeNode<T>> res = new LinkedList<TreeNode<T>>();
+    	
+    	//Just because it's faster to loop through a simple list
+    	for(TreeNode<T> n:elementsIndex) if (n.data.equals(data)) res.add(n);
+    	
+    	return res;
     }
 
     public ITreeIterator<TreeNode<T>> iterator() {
-        //TreeNodeIter<T> iter = new TreeNodeIter<T>(this);
 		TreeIter<T> iter =  new TreeIter<T>(this);
         return iter;
     }
@@ -85,8 +88,8 @@ public class TreeNode<T> implements ITree<T>, Iterable<TreeNode<T>> {
 	}
 	
 	/*
-	 * Remove the given node from the tree. 
-	 *  Obviously, it must be a child (to some level) of this branch, and not the root!
+	 * Removes the given node from the tree. 
+	 *  Obviously, it must have a parent, or this is meaningless.
 	 */
 	public void removeElement(TreeNode<T> node) 
 	{
@@ -98,35 +101,28 @@ public class TreeNode<T> implements ITree<T>, Iterable<TreeNode<T>> {
 		parentNode.unRegisterChildFromSearch(node);
 	}
 	
-    @SuppressWarnings("unchecked")
-	@Override
-	/**
+	/*
 	 * Returns a nice representation of the whole tree starting from this node.
 	 * (With indentation and everything!)
 	 */
-	public String toString() 
+	public String printTree() 
     {
-    	int level = this.getLevel();
-		String s = "";
-		
-		ITreeIterator<T> iter = (ITreeIterator<T>) this.iterator();
-		TreeNode<T> node = (TreeNode<T>) iter.current();
-		
-		do
-		{
-			String tabs = "";
-			for (int i=0, n=node.getLevel(); i<n; i++) tabs += "\t";
-			
-			s += tabs + node.dataToString() + "\n";
-			
-			node = (TreeNode<T>) iter.next();
-		}while(node != null && node.getLevel() > level);
+    	String s = "";
 
+    	for(TreeNode<T> node:this)
+    	{
+    		String tabs = "";
+			for (int i=0, n=node.getLevel(); i<n; i++) tabs += "\t";
+			s += tabs + node.toString() + "\n";
+    	}
+    	
     	return s;
 	}
-	
+    
+
     //ToString of the nodes data, ignoring the fact that it's part of a tree
-    public String dataToString() {
+	@Override
+    public String toString() {
             return data != null ? data.toString() : "[data null]";
     }
 }

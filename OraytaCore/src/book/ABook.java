@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import search.ISearchQuery;
-import search.ISearchResults;
+import search.ISearchResult;
 import tree.IHasID;
 
 /*
@@ -60,5 +60,5 @@ public abstract class ABook implements Comparable<ABook>, IHasID
 	
 	public abstract ChapterTree getChapterList();
 	
-	public abstract ISearchResults search(ISearchQuery query);
+	public abstract ISearchResult search(ISearchQuery query);
 }

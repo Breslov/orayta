@@ -12,5 +12,5 @@ public interface ITree<T> {
 	
 	public void removeElement(TreeNode<T> node);
 
-	public TreeNode<T> findTreeNode(TreeNode<T> node);
+	public Collection<TreeNode<T>> findTreeNodes(T data);
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import fileManager.SimpleFileReader;
 
 import search.ISearchQuery;
-import search.ISearchResults;
+import search.ISearchResult;
 
 public class BookFolder extends ABook
 {
@@ -50,7 +50,7 @@ public class BookFolder extends ABook
 	}
 
 	@Override
-	public ISearchResults search(ISearchQuery query) {
+	public ISearchResult search(ISearchQuery query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

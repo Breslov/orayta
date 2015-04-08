@@ -2,22 +2,24 @@ package tree;
 
 public class TreeIter<T> implements ITreeIterator<TreeNode<T>> 
 {
-	TreeNode<T> currentNode;
+	boolean firstUsed = false;
+	TreeNode<T> curNode;
 	
 	public TreeIter(TreeNode<T> treeNode)
 	{
-		currentNode = treeNode;
+		curNode = treeNode;
 	}
 	
 	public boolean hasNext() {
-		return (NextNode(currentNode) != null);
+		return (NextNode(curNode) != null);
 	}
 
 	public TreeNode<T> next() 
 	{
-		TreeNode<T> next = NextNode(currentNode);
-		this.currentNode = next;
-		return this.currentNode;
+		if (!firstUsed) firstUsed = true;
+		else curNode = NextNode(curNode); 
+		
+		return this.curNode;
 	}
 
 	private TreeNode<T> NextNode(TreeNode<T> currentNode) 
@@ -46,15 +48,16 @@ public class TreeIter<T> implements ITreeIterator<TreeNode<T>>
 		return NextNonChildNode(parentNode);
 	}
 	
-	public boolean hasPrevius() {
-		return (previousNode(currentNode) != null);
+	public boolean hasPrevious() {
+		return (previousNode(curNode) != null);
 	}
 	
 	public TreeNode<T> previous() 
 	{
-		TreeNode<T> prev = previousNode(currentNode);
-		this.currentNode = prev;
-		return currentNode;
+		if (!firstUsed) firstUsed = true;
+		else curNode = previousNode(curNode); 
+		
+		return this.curNode;
 	}
 
 	private TreeNode<T> previousNode(TreeNode<T> node) 
@@ -81,17 +84,6 @@ public class TreeIter<T> implements ITreeIterator<TreeNode<T>>
 	}
 
 	public void remove() {
-		this.currentNode.parent.removeElement(this.currentNode);
+		this.curNode.parent.removeElement(this.curNode);
 	}
-
-	public TreeNode<T> current() 
-	{
-		return currentNode;
-	}
-
-	public boolean hasPrevious() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

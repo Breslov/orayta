@@ -8,13 +8,24 @@ import java.util.List;
 
 import tree.TreeNode;
 
-import fileManager.SimpleFileReader;
 import fileManager.ZipReader;
 import book.BookContents;
 import book.ChapterID;
 import book.DChapter;
 import book.IChapter;
 import book.OBK_Book;
+
+
+/*
+ * TODO list:
+ * - Finish simple book reading
+ * - Implement complex book reading (gamra, etc')
+ * 
+ * - Html generation from read books 
+ * - Implement weaved display rendering
+ * - Implement index displaying
+ */
+
 
 public class OBK_Builder implements IBookBuilder<OBK_Book> 
 {
@@ -123,7 +134,7 @@ public class OBK_Builder implements IBookBuilder<OBK_Book>
 				}
 			}
 			
-			System.out.println(chapterContentsTree);
+			System.out.println(chapterContentsTree.printTree());
 			
 			BookContents bc = new BookContents();
 			bc.setChapterContentsTree(chapterContentsTree);

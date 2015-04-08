@@ -2,7 +2,7 @@ package book;
 
 import fileManager.ZipReader;
 import search.ISearchQuery;
-import search.ISearchResults;
+import search.ISearchResult;
 
 public class OBK_Book extends ABook
 {
@@ -36,7 +36,7 @@ public class OBK_Book extends ABook
 	}
 
 	@Override
-	public ISearchResults search(ISearchQuery query) {
+	public ISearchResult search(ISearchQuery query) {
 		// TODO Auto-generated method stub
 		return null;
 	}

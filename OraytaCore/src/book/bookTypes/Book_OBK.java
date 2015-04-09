@@ -1,5 +1,7 @@
 package book.bookTypes;
 
+import html.HtmlBuilder;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -155,8 +157,29 @@ public class Book_OBK extends ABook
 
 	private String genMarkerAnchor(int levelCode, String markerText)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		String anchorHexID = escapeToHex(markerText);
+		
+		String MarkerAnchor = HtmlBuilder.createHeading(levelCode, HtmlBuilder.createAnchor(anchorHexID, markerText));
+		
+		System.out.println(MarkerAnchor);
+		
+		return MarkerAnchor;
+	}
+
+	//	Because for some stupid reason some renderers can't handle internal html links with Hebrew chars, 
+	//	this function converts any given Unicode String to a string representing each char's
+	//	Unicode values in Hex, (separated by '\\u's), thus giving a valid digit-or-english-letter-only string.
+	public String escapeToHex(String str)
+	{
+	    String base32 = "";
+
+	    for (int i=0; i<str.length(); i++)
+	    {
+	    	char c = str.charAt(i);
+	    	base32 += String.format ("\\u%04x", (int)c);
+	    }
+
+	    return base32;
 	}
 
 	//NOTE: If num == UBound this returns False!

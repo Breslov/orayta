@@ -136,10 +136,12 @@ public class Book_OBK extends ABook
 				{
 					//In this case, we met a '!' marker. The format is: "! {LVL_NAME}\n".
 					// So we need to crop the "! {" and the "}" to get the LVL_NAME
-					String markerText = line.replace("!{", "");
+					String markerText = line.replace("! {", "");
 					markerText = markerText.replace("}", "");
 					
-					chap.setChapterText(chap.text() + genMarkerAnchor(levelCode, markerText) + "\n");
+					chap.setChapterText(chap.text() + genAnchor(markerText) + "\n");
+					
+					System.out.println(genAnchor(markerText));
 				}
 				else
 				{
@@ -148,38 +150,19 @@ public class Book_OBK extends ABook
 				}
 			}
 		}
-		
-		
-		
+
 		mContents.setChapterContentsTree(chapterContentsTree);
 		mContents.setChapterIDTree(chapterIDTree);
 	}
 
+	private String genAnchor(String markerText)
+	{
+		return HtmlBuilder.createAnchor(markerText);
+	}
+	
 	private String genMarkerAnchor(int levelCode, String markerText)
 	{
-		String anchorHexID = escapeToHex(markerText);
-		
-		String MarkerAnchor = HtmlBuilder.createHeading(levelCode, HtmlBuilder.createAnchor(anchorHexID, markerText));
-		
-		System.out.println(MarkerAnchor);
-		
-		return MarkerAnchor;
-	}
-
-	//	Because for some stupid reason some renderers can't handle internal html links with Hebrew chars, 
-	//	this function converts any given Unicode String to a string representing each char's
-	//	Unicode values in Hex, (separated by '\\u's), thus giving a valid digit-or-english-letter-only string.
-	public String escapeToHex(String str)
-	{
-	    String base32 = "";
-
-	    for (int i=0; i<str.length(); i++)
-	    {
-	    	char c = str.charAt(i);
-	    	base32 += String.format ("\\u%04x", (int)c);
-	    }
-
-	    return base32;
+		return HtmlBuilder.createHeading(levelCode, genAnchor(markerText));
 	}
 
 	//NOTE: If num == UBound this returns False!
@@ -221,11 +204,11 @@ public class Book_OBK extends ABook
 			}
 		}
 		
-//		for (ChapterID cid:flatIndex)
-//		{
-//			System.out.print(cid.getLevel() + " : ");
-//			System.out.println(cid);
-//		}
+		//for (ChapterID cid:flatIndex)
+		//{
+		//	System.out.print(cid.getLevel() + " : ");
+		//	System.out.println(cid);
+		//}
 		
 		//Split into 2 level chunks, if these exist:
 		

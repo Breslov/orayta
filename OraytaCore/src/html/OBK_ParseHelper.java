@@ -83,12 +83,11 @@ public class OBK_ParseHelper
 		        	BookUniqueId = Integer.valueOf(splitStr.get(1).substring(3, ind-1));
 		            
 		            //Get BookInternalLabel
-		            BookInternalLabel = splitStr.get(1).substring(ind+1);
+		            BookInternalLabel = splitStr.get(1).substring(ind+1).trim();
 		            
 		        	System.out.println(BookInternalLabel);
 		        }
 		    }
-	    
 	    }
 	    catch (NumberFormatException e) {return "";}
 
@@ -117,7 +116,7 @@ public class OBK_ParseHelper
 	    {
 	        Html += "<a href=\"!" + BookUniqueId;
 	        Html += ":" +  linkto + "\">";
-	        Html += DisplayedText + "</a>\n";
+	        Html += DisplayedText + "</a>";
 	    }
 	    else
 	    {
@@ -160,7 +159,6 @@ public class OBK_ParseHelper
 		return toUnicode(isoStr, "ISO-8859-8");
 	}
 	
-	// ERROR: This seems to only half work. Avoid using it!
 	public static String Encrypt (String text) 
 	{
 		byte[] asciiVals = text.getBytes(Charset.forName("ISO-8859-8"));
@@ -169,7 +167,7 @@ public class OBK_ParseHelper
 		int j=0;
 		for (byte b:asciiVals)
 		{
-			byte d = (byte) ('A' + b & 15);
+			byte d = (byte) ('A' + (b & 15));
 			byte d2 = (byte)('A' + ((b >> 4) & 15));
 			
 			isoStr[j++] = d;

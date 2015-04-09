@@ -4,24 +4,24 @@ import tree.IHasID;
 
 public class ChapterID implements Comparable<ChapterID>, IHasID
 {
-	private int mBookId;
+	private BookID mBookId;
 	private String mUID;
 	private int mLevel = -1;
 	
-	public ChapterID(int bookId, String id)
+	public ChapterID(BookID bookId, String id)
 	{
 		mBookId = bookId;
 		mUID = id;
 	}
 	
-	public ChapterID(int bookId)
+	public ChapterID(BookID bookId)
 	{
 		mBookId = bookId;
 	}
 	
 	public void setID(String id) { mUID = id; }
 	
-	public int getBookID() {
+	public BookID getBookID() {
 		return mBookId;
 	}
 
@@ -29,7 +29,7 @@ public class ChapterID implements Comparable<ChapterID>, IHasID
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + mBookId;
+		result = prime * result + mBookId.getID();
 		result = prime * result + ((mUID == null) ? 0 : mUID.hashCode());
 		return result;
 	}
@@ -59,7 +59,7 @@ public class ChapterID implements Comparable<ChapterID>, IHasID
 	
 	public String toString()
 	{
-		 return "Book: " + mBookId + " - " + mUID;
+		 return "(Book: " + mBookId + ") - " + mUID;
 	}
 
 	public int compareTo(ChapterID o) 

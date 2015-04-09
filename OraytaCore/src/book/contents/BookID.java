@@ -1,6 +1,8 @@
 package book.contents;
 
-public class BookID implements Comparable<BookID>
+import tree.IHasID;
+
+public class BookID implements Comparable<BookID>, IHasID
 {
 	Integer UID = -1;
 	String mDisplayName;
@@ -11,12 +13,18 @@ public class BookID implements Comparable<BookID>
 		mDisplayName = displayName;
 	}
 	
-	public String getDisplayName() {return mDisplayName; }
+	public String getDisplayName() { return mDisplayName; }
 	
-	public int getID() {return UID;}
+	public int getID() { return UID; }
+	
+	public String getUID() { return Integer.toString(UID); }
 	
 	public int compareTo(BookID o) {
 		return UID.compareTo(o.getID());
+	}
+	
+	public String toString() {
+		return getDisplayName();
 	}
 
 	@Override

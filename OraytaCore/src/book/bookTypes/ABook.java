@@ -31,8 +31,8 @@ public abstract class ABook implements Comparable<ABook>, IHasID, ISearchable
 	
 	//public abstract IChapter getChapter(ChapterID address);
 	
-	public BookID getID() { return mID; }
-	public String getUID() { return String.valueOf(mID.getID()); }
+	public BookID getBookID() { return mID; }
+	public String getUID() { return mID.getUID(); }
 	
 	public String getPath() { return mFilePath; }
 	
@@ -62,9 +62,9 @@ public abstract class ABook implements Comparable<ABook>, IHasID, ISearchable
 	//Compare by id
 	public int compareTo(ABook other) 
 	{
-		if (this.getID() == null) return -1;
-		if (other.getID() == null) return 1;
+		if (this.getBookID() == null) return -1;
+		if (other.getBookID() == null) return 1;
 		
-		return this.getID().compareTo(other.getID());
+		return this.getBookID().compareTo(other.getBookID());
 	}
 }
